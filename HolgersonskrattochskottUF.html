@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="sv" data-season="autumn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HolgersonskrattochskottUF – kratt, skott och trädgårdsfix i Tidaholm</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&display=swap" rel="stylesheet">
+<style>
+:root{--base:#f1f4ec;--fg:#17231a;--mute:#4d5f50;--card:#fbfdf8;--a:#d4571a;--b:#e8a317;--d:#2c4a22;--bg:color-mix(in srgb,var(--a) 6%,var(--base));--ln:color-mix(in srgb,var(--fg) 14%,transparent);color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root[data-season=winter]{--a:#2a7fc9;--b:#7cc0ee;--d:#12365c}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--base:#0f140e;--fg:#f1f0e8;--mute:#a5b2a7;--card:#172016;color-scheme:dark}}
+:root[data-theme=dark]{--base:#0f140e;--fg:#f1f0e8;--mute:#a5b2a7;--card:#172016;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box;margin:0}
+body{font:17px/1.65 'Bricolage Grotesque',system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--fg);overflow-x:hidden}
+::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
+#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:5}
+.cur{position:fixed;inset:0;z-index:50;background:linear-gradient(160deg,var(--d),var(--a));transform:translateY(100%);pointer-events:none;display:grid;place-items:center;font-size:4.5rem}
+.cur span{animation:spin 1.4s linear infinite}
+.nav{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:calc(12px + env(safe-area-inset-top,0px)) 5vw 12px;background:color-mix(in srgb,var(--bg) 72%,transparent);backdrop-filter:blur(16px);border-bottom:1px solid var(--ln)}
+.logo{display:flex;align-items:center;gap:.5em;font-weight:800;letter-spacing:-.02em;color:var(--fg);text-decoration:none}
+.logo i{font-style:normal;font-size:.7em;background:var(--a);color:#fff;border-radius:8px;padding:2px 8px}
+#lg{display:inline-block;font-size:1.4em;animation:sway 3s ease-in-out infinite alternate}
+.nl{display:flex;align-items:center;gap:6px}
+.nl a{color:var(--fg);text-decoration:none;font-weight:600;padding:8px 14px;border-radius:99px;transition:background .3s}
+.nl a:hover,.nl a.on{background:color-mix(in srgb,var(--a) 20%,transparent)}
+.sw{position:relative;display:flex;align-items:center;justify-content:space-around;width:72px;height:34px;margin-left:6px;border-radius:99px;border:1px solid var(--ln);background:var(--card);cursor:pointer;font-size:15px}
+.sw i{position:absolute;left:3px;top:3px;width:28px;height:28px;border-radius:50%;background:var(--a);opacity:.4;transition:transform .55s cubic-bezier(.7,0,.2,1)}
+[data-season=winter] .sw i{transform:translateX(38px)}
+.sw span{position:relative}
+.sw:focus-visible,.btn:focus-visible,.nl a:focus-visible{outline:3px solid var(--a);outline-offset:3px}
+.page{display:none}.page.on{display:block}
+.hero{position:relative;min-height:100svh;display:grid;place-content:center;justify-items:center;text-align:center;padding:130px 6vw 90px;overflow:hidden;color:#fff;background:linear-gradient(150deg,var(--d) 0%,var(--a) 75%,var(--b) 135%)}
+.hero.ph{min-height:72svh}
+.hero::before,.hero::after{content:"";position:absolute;left:-20vmax;top:-20vmax;width:60vmax;height:60vmax;border-radius:50%;background:radial-gradient(#ffffff38,transparent 65%);animation:fl 18s ease-in-out infinite alternate}
+.hero::after{left:auto;top:auto;right:-25vmax;bottom:-30vmax;animation-delay:-9s;opacity:.65}
+.hero>*{position:relative;z-index:6}
+.hero h1{font-size:clamp(2.9rem,9.5vw,7.8rem);line-height:.95;letter-spacing:-.045em;font-weight:800;text-shadow:0 4px 40px #0005;max-width:15ch}
+.lead{max-width:600px;margin:30px auto 34px;font-size:clamp(1.05rem,2vw,1.3rem);text-shadow:0 2px 18px #0006}
+.badge{position:absolute;right:5vw;bottom:7vh;width:132px;z-index:6;fill:#fff;font:700 16px 'Bricolage Grotesque',sans-serif;animation:spin 22s linear infinite}
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .04em .12em}
+.w>span{display:inline-block;transform:translateY(110%) rotate(5deg);transition:transform .95s cubic-bezier(.2,.8,.2,1) calc(var(--i)*.07s + .1s)}
+.split.in .w>span{transform:none}
+.rv{opacity:0}
+.rv.in{opacity:1;animation:up .9s cubic-bezier(.2,.8,.2,1) calc(var(--d,0)*.12s) both}
+.btn{display:inline-flex;align-items:center;margin:6px;padding:15px 30px;border-radius:99px;border:2px solid #fff;background:#fff;color:#17231a;font:inherit;font-weight:700;text-decoration:none;transition:background .3s,color .3s,box-shadow .3s,translate .25s ease-out}
+.btn:hover{box-shadow:0 14px 34px -8px #0008}
+.btn.g{background:transparent;color:#fff;border-color:#fffb}.btn.g:hover{background:#fff;color:#17231a}
+.mq{position:relative;z-index:2;overflow:hidden;white-space:nowrap;margin:-14px 0;padding:16px 0;rotate:-1.5deg;scale:1.04;background:var(--fg);color:var(--bg);font-size:clamp(1.2rem,3vw,1.9rem);font-weight:800;letter-spacing:-.01em}
+.mq div{display:inline-block;animation:mq 30s linear infinite}
+.sec{max-width:1240px;margin:auto;padding:clamp(70px,10vw,120px) 6vw}
+.h2{font-size:clamp(2.1rem,5.5vw,4rem);line-height:1.02;letter-spacing:-.035em;font-weight:800;margin-bottom:44px}
+.u{position:relative;white-space:nowrap}
+.u::after{content:"";position:absolute;left:0;right:0;bottom:.04em;height:.26em;border-radius:9px;background:var(--a);opacity:.4;transform:scaleX(0);transform-origin:left;transition:transform 1s cubic-bezier(.2,.8,.2,1) .6s}
+.in .u::after{transform:scaleX(1)}
+.grid,.seasons,.steps,.two{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.card{position:relative;overflow:hidden;padding:36px 32px;border-radius:30px;background:var(--card);border:1px solid var(--ln);transition:transform .25s ease-out,box-shadow .3s}
+.card::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(260px circle at var(--mx,50%) var(--my,0%),color-mix(in srgb,var(--a) 24%,transparent),transparent)}
+.card:hover{box-shadow:0 26px 60px -22px color-mix(in srgb,var(--a) 60%,transparent)}.card:hover::after{opacity:1}
+.card h3,.step h3,.glow h3,.sn h3{font-size:1.55rem;letter-spacing:-.02em;line-height:1.2}
+.card h3{margin:14px 0 8px}.card p,.step p,.glow p{color:var(--mute)}
+.ic{display:inline-block;font-size:3.2rem;line-height:1;animation:sway 3s ease-in-out infinite alternate}
+.steps{counter-reset:s;gap:34px}
+.step{position:relative;padding-top:98px}
+.step::before{counter-increment:s;content:"0" counter(s);position:absolute;top:0;left:0;font-size:6.2rem;font-weight:800;line-height:1;color:transparent;-webkit-text-stroke:2px var(--a);transition:color .4s}
+.step:hover::before{color:var(--a)}
+.two{grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:56px;align-items:center}
+.two p{margin-bottom:16px;max-width:60ch}
+.glow{position:relative;overflow:hidden;padding:2px;border-radius:34px}
+.glow::before{content:"";position:absolute;inset:-60%;background:conic-gradient(var(--a),var(--b),var(--d),var(--a));animation:spin 6s linear infinite}
+.glow>div{position:relative;padding:36px;border-radius:32px;background:var(--card)}
+.glow h3{margin-bottom:10px}
+.seasons{grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}
+.sn{display:flex;flex-direction:column;justify-content:flex-end;gap:6px;min-height:260px;padding:28px;border-radius:28px;color:#fff;background:linear-gradient(160deg,var(--c1),var(--c2));transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.sn:hover{transform:translateY(-10px) rotate(-1.5deg)}
+.sn .ic{align-self:flex-start;margin-bottom:auto}.sn p{font-size:.98rem;line-height:1.45}
+.val{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:10px 24px;padding:26px 0;border-top:1px solid var(--ln);transition:padding .4s,color .4s}
+.val:last-child{border-bottom:1px solid var(--ln)}
+.val b{font-size:clamp(1.8rem,4vw,3rem);letter-spacing:-.03em}
+.val span{max-width:420px;color:var(--mute)}
+.val:hover{padding-left:26px;color:var(--a)}
+.sh{padding:0 6vw}
+.cta{max-width:1100px;margin:40px auto 90px;padding:clamp(44px,8vw,96px) 6vw;border-radius:42px;text-align:center;color:#fff;background:linear-gradient(135deg,var(--d),var(--a),var(--b)) 0 0/200% 200%;animation:gd 10s ease-in-out infinite alternate}
+.cta .h2{margin-bottom:14px}.cta p{max-width:520px;margin:0 auto 22px;text-shadow:0 2px 14px #0006}
+.foot{padding:10px 6vw 50px;text-align:center;color:var(--mute);font-size:.9rem}
+@keyframes up{from{opacity:0;translate:0 44px;scale:.96}}
+@keyframes gd{to{background-position:100% 100%}}
+@keyframes fl{to{transform:translate(12vmax,10vmax) scale(1.25)}}
+@keyframes spin{to{transform:rotate(1turn)}}
+@keyframes mq{to{transform:translateX(-50%)}}
+@keyframes sway{to{transform:rotate(14deg) translateY(-6px)}}
+@media(max-width:640px){.lt,.badge{display:none}.nl a{padding:8px 10px}.hero{padding-top:110px}}
+@media(prefers-reduced-motion:reduce){*,::before,::after{animation:none!important;transition:none!important}.rv{opacity:1}.w>span{transform:none}.u::after{transform:none}}
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<div class="cur" id="cur" aria-hidden="true"><span id="ci">🍂</span></div>
+<header class="nav">
+  <a class="logo" href="#home"><span id="lg">🍂</span><span class="lt">Holgersons Kratt &amp; Skott</span><i>UF</i></a>
+  <nav class="nl">
+    <a href="#home">Hem</a><a href="#about">Om oss</a>
+    <button class="sw" id="sw" aria-label="Byt årstid mellan höst och vinter"><i></i><span>🍂</span><span>❄️</span></button>
+  </nav>
+</header>
+
+<main id="home" class="page">
+  <section class="hero">
+    <h1 class="split">Vi kratar löven. Vi skottar snön.</h1>
+    <p class="lead rv">Vi är ett UF-företag i Tidaholm som hjälper dig med trädgårdsstädning, lövkrattning och snöskottning, hela året.</p>
+    <p class="rv" style="--d:2"><a class="btn" href="mailto:din@epost.se">Boka oss</a><a class="btn g" href="#about">Om oss</a></p>
+    <svg class="badge" viewBox="0 0 200 200" aria-hidden="true"><defs><path id="cp" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs><text><textPath href="#cp" textLength="485" lengthAdjust="spacing">Tidaholm ✦ UF-företag ✦ året runt ✦ </textPath></text><text x="100" y="116" text-anchor="middle" font-size="46" font-weight="800">UF</text></svg>
+  </section>
+  <div class="mq" aria-hidden="true"><div id="mqd"></div></div>
+  <section class="sec">
+    <h2 class="h2 split">Tre tjänster, en fin trädgård.</h2>
+    <div class="grid">
+      <article class="card rv"><span class="ic">🍂</span><h3>Lövkrattning</h3><p>Vi kratar ihop löven så att gräsmattan får andas innan vintern kommer.</p></article>
+      <article class="card rv" style="--d:1"><span class="ic" style="animation-delay:-1s">🌿</span><h3>Trädgårdsstädning</h3><p>Vi städar upp i trädgården, rensar och fixar till så att den ser prydlig ut.</p></article>
+      <article class="card rv" style="--d:2"><span class="ic" style="animation-delay:-2s">❄️</span><h3>Snöskottning</h3><p>Vi skottar uppfarten, trappan och gångarna så att du kommer ut tryggt efter snöfallet.</p></article>
+    </div>
+  </section>
+  <section class="sec" style="padding-top:0">
+    <h2 class="h2 split">Så funkar det</h2>
+    <div class="steps">
+      <div class="step rv"><h3>Hör av dig</h3><p>Berätta vad du behöver hjälp med och var i Tidaholm du bor.</p></div>
+      <div class="step rv" style="--d:1"><h3>Vi kommer</h3><p>Vi dyker upp med kratta och skyffel och sätter igång direkt.</p></div>
+      <div class="step rv" style="--d:2"><h3>Du njuter</h3><p>Du får en fin trädgård eller en skottad uppfart utan att lyfta ett finger.</p></div>
+    </div>
+  </section>
+</main>
+
+<main id="about" class="page">
+  <section class="hero ph">
+    <h1 class="split">Ett gäng från Tidaholm med kratta i handen.</h1>
+    <p class="lead rv">Lär känna företaget bakom lövhögarna och snödrivorna.</p>
+  </section>
+  <section class="sec">
+    <div class="two">
+      <div>
+        <h2 class="h2 rv">Vår <span class="u">historia</span></h2>
+        <p class="rv">HolgersonskrattochskottUF är ett UF-företag baserat i Tidaholm. Vi startade för att hjälpa våra grannar med det som ingen riktigt har tid eller lust med: att kratta löv, städa trädgården och skotta snö.</p>
+        <p class="rv" style="--d:1">Vi jobbar hela året. När löven faller på hösten kommer vi med krattan, och när snön lägger sig tar vi fram skyffeln. Däremellan ser vi till att trädgårdar är fina och välskötta.</p>
+      </div>
+      <div class="glow rv" style="--d:2"><div><h3>Vad är ett UF-företag?</h3><p>UF står för Ung Företagsamhet. Under ett skolår startar, driver och avslutar vi ett riktigt företag, från idé och prissättning till kundkontakt och bokföring. Det är vårt sätt att lära oss entreprenörskap på riktigt.</p></div></div>
+    </div>
+  </section>
+  <section class="sec" style="padding-top:0">
+    <h2 class="h2 split">Vi jobbar året runt</h2>
+    <div class="seasons">
+      <div class="sn rv" style="--c1:#3f8f3f;--c2:#1f5a33"><span class="ic">🌱</span><h3>Vår</h3><p>Efter vintern städar vi upp och väcker trädgården.</p></div>
+      <div class="sn rv" style="--c1:#d9770a;--c2:#a63a0d;--d:1"><span class="ic" style="animation-delay:-1s">☀️</span><h3>Sommar</h3><p>Vi hjälper dig att hålla trädgården fräsch och välskött.</p></div>
+      <div class="sn rv" style="--c1:#c2501a;--c2:#6b3410;--d:2"><span class="ic" style="animation-delay:-2s">🍂</span><h3>Höst</h3><p>Löven faller och vi kratar. Din gräsmatta tackar dig.</p></div>
+      <div class="sn rv" style="--c1:#2a7fc9;--c2:#12365c;--d:3"><span class="ic" style="animation-delay:-3s">❄️</span><h3>Vinter</h3><p>Snön kommer och vi skottar. Du tar dig ut tryggt.</p></div>
+    </div>
+  </section>
+  <section class="sec" style="padding-top:0">
+    <h2 class="h2 split">Det här står vi för</h2>
+    <div class="val rv"><b>Pålitliga</b><span>Vi kommer när vi har sagt att vi kommer och gör det vi har lovat.</span></div>
+    <div class="val rv"><b>Lokala</b><span>Vi finns i Tidaholm och är nära när du behöver oss.</span></div>
+    <div class="val rv"><b>Noggranna</b><span>Vi lämnar det fint, utan löv eller snö som gömt sig i hörnen.</span></div>
+  </section>
+</main>
+
+<section class="sh">
+  <div class="cta">
+    <h2 class="h2 split">Redo att slippa kratta och skotta?</h2>
+    <p class="rv">Hör av dig så kommer vi och fixar det, hela året.</p>
+    <p class="rv" style="--d:1"><a class="btn" href="mailto:din@epost.se">Skriv till oss</a></p>
+  </div>
+</section>
+<footer class="foot">© 2026 HolgersonskrattochskottUF. Ett UF-företag i Tidaholm.</footer>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],root=document.documentElement,pages={home:$('#home'),about:$('#about')};
+let mode='autumn';
+/* split headlines into words for the rise-in reveal */
+$$('.split').forEach(el=>{let i=0;[...el.childNodes].forEach(n=>{if(n.nodeType==3){const f=document.createDocumentFragment();n.textContent.split(/\s+/).filter(Boolean).forEach(w=>{const s=document.createElement('span');s.className='w';s.innerHTML='<span style="--i:'+(i++)+'">'+w+'</span>';f.append(s,' ')});n.replaceWith(f)}})});
+$('#mqd').textContent=('Lövkrattning ✦ Snöskottning ✦ Trädgårdsstädning ✦ Tidaholm ✦ ').repeat(6);
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
+/* two pages, hash routing */
+function show(){const k=location.hash=='#about'?'about':'home';for(const n in pages)pages[n].classList.toggle('on',n==k);$$('.nl a[href^="#"]').forEach(a=>a.classList.toggle('on',a.hash=='#'+k));scrollTo({top:0,behavior:'instant'});$$('#'+k+' .rv,#'+k+' .split,.sh .rv,.sh .split').forEach(e=>{e.classList.remove('in');io.observe(e)})}
+let first=1;
+function go(){if(first){first=0;return show()}const c=$('#cur'),o={duration:520,easing:'cubic-bezier(.7,0,.2,1)',fill:'forwards'};c.animate([{transform:'translateY(100%)'},{transform:'translateY(0)'}],o).finished.then(()=>{show();c.animate([{transform:'translateY(0)'},{transform:'translateY(-100%)'}],o)})}
+addEventListener('hashchange',go);go();
+/* season switch with a circular reveal */
+$('#sw').onclick=e=>{const s=mode=='autumn'?'winter':'autumn',r=e.currentTarget.getBoundingClientRect(),X=r.left+r.width/2,Y=r.top+r.height/2;
+const f=()=>{mode=s;root.dataset.season=s;$('#lg').textContent=$('#ci').textContent=s=='winter'?'❄️':'🍂';seed()};
+if(!document.startViewTransition)return f();
+document.startViewTransition(f).ready.then(()=>root.animate({clipPath:['circle(0 at '+X+'px '+Y+'px)','circle('+Math.hypot(innerWidth,innerHeight)+'px at '+X+'px '+Y+'px)']},{duration:850,easing:'ease-in-out',pseudoElement:'::view-transition-new(root)'}))};
+/* falling leaves and snow that you can rake away with the cursor */
+const cv=$('#fx'),x=cv.getContext('2d'),LC=['#d9480f','#e8890c','#f0b429','#b5381c','#7a9a2e'],m={x:-999,y:-999,vx:0,vy:0};let W=0,H=0,P=[];
+const mk=init=>{const w=mode=='winter';return{w,x:Math.random()*W,y:init?Math.random()*H:-30,r:w?2+Math.random()*3.5:8+Math.random()*9,vx:0,vy:0,fy:(w?.5:.7)+Math.random()*(w?.9:1.1),ph:Math.random()*6.3,a:Math.random()*6.3,va:(Math.random()-.5)*.05,c:LC[Math.random()*5|0]}};
+function seed(){P=Array.from({length:W<700?32:70},()=>mk(1))}
+function size(){const d=devicePixelRatio||1;W=innerWidth;H=innerHeight;cv.width=W*d;cv.height=H*d;x.setTransform(d,0,0,d,0,0)}
+size();seed();
+addEventListener('resize',()=>{const w=W;size();if(W!=w)seed()});
+addEventListener('pointermove',e=>{const f=m.x<0;m.vx=f?0:e.clientX-m.x;m.vy=f?0:e.clientY-m.y;m.x=e.clientX;m.y=e.clientY});
+function draw(p){x.save();x.translate(p.x,p.y);x.rotate(p.a);x.beginPath();
+if(p.w){x.arc(0,0,p.r,0,6.3);x.fillStyle='rgba(255,255,255,.95)';x.fill();x.strokeStyle='rgba(42,127,201,.5)';x.stroke()}
+else{const r=p.r;x.moveTo(0,-r);x.quadraticCurveTo(r*.9,-r*.1,0,r);x.quadraticCurveTo(-r*.9,-r*.1,0,-r);x.globalAlpha=.9;x.fillStyle=p.c;x.fill();x.beginPath();x.moveTo(0,-r);x.lineTo(0,r*1.25);x.strokeStyle='rgba(0,0,0,.28)';x.stroke()}
+x.restore()}
+function tick(){x.clearRect(0,0,W,H);m.vx*=.9;m.vy*=.9;
+for(const p of P){p.ph+=.02;p.x+=Math.sin(p.ph)*(p.w?.5:1.2)+p.vx;p.y+=p.fy+p.vy;
+const dx=p.x-m.x,dy=p.y-m.y,d=Math.hypot(dx,dy)||1;
+if(d<140){const f=(140-d)/140;p.vx+=dx/d*f*1.6+m.vx*.04;p.vy+=dy/d*f*1.6+m.vy*.04}
+p.vx*=.94;p.vy*=.94;p.a+=p.va+p.vx*.03;
+if(p.y>H+30)Object.assign(p,mk(0));if(p.x<-40)p.x=W+40;if(p.x>W+40)p.x=-40;draw(p)}
+requestAnimationFrame(tick)}
+if(!matchMedia('(prefers-reduced-motion:reduce)').matches)tick();
+/* 3D tilt on cards and magnetic buttons */
+$$('.card').forEach(c=>{c.onpointermove=e=>{const r=c.getBoundingClientRect(),px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;c.style.cssText='--mx:'+px*100+'%;--my:'+py*100+'%;transform:perspective(800px) rotateX('+(.5-py)*10+'deg) rotateY('+(px-.5)*12+'deg) translateY(-6px)'};c.onpointerleave=()=>c.style.cssText=''});
+$$('.btn').forEach(b=>{b.onpointermove=e=>{const r=b.getBoundingClientRect();b.style.translate=(e.clientX-r.left-r.width/2)*.25+'px '+(e.clientY-r.top-r.height/2)*.35+'px'};b.onpointerleave=()=>b.style.translate=''});
+</script>
+</body>
+</html>
